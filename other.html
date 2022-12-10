@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>replit</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+<!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD54LZaGo7pnYQwQDkBbXKG6SO_-7hD7i0&libraries=places"></script> -->
+</head>
+<script src="script.js"></script>
+<body>
+  <h1>UW Husky NightDrive</h1>
+  <h3>Map Centered at UW Demo</h3>
+  <article class="login-bo">
+  <form id="other">
+    <section class="user-box">
+      <input type="text" name="loc" id="input-name" required>
+      <label>Location</label>
+    </section>
+    <section class="user-box">
+      <input type="text" name="type" id="input-name" required>
+      <label>Type of Service</label>
+    </section>
+  </form>
+    <a href="./intro.html" onClick="getLocationOther()" id="submit-request">Next</a>
+  </article>
+  <br>
+  <br><br>
+  <br><br>
+  <br><br>
+  <br><br>
+  <br><br>
+  <br><br>
+  <br><br>
+
+  <div id="map"></div>
+</body>
+
+<!-- <input type="text"required id="autocomplete" placeholder="Current Location"> -->
+
+<!-- <script>
+function initAutocomplete() {
+  new google.maps.places.Autocomplete(
+          (document.getElementById('autocomplete')),
+          {types: ['city']}
+   );
+}
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD54LZaGo7pnYQwQDkBbXKG6SO_-7hD7i0&libraries=places&callback=initAutocomplete"></script> -->
+
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD54LZaGo7pnYQwQDkBbXKG6SO_-7hD7i0&callback=initMap">
+</script>
+
+
+<script>
+  function initMap() {
+    var uw = {
+      lat: 47.6573,
+      lng: -122.3072
+    };
+    var mapOptions = {
+      center: uw,
+      zoom: 15
+    };
+    //google.maps.event.trigger(map, 'resize')
+
+    var map = new google.maps.Map(
+      document.getElementById("map"), mapOptions);
+
+    var marker = new google.maps.Marker({
+      position: uw,
+      map: map
+    });
+
+    // Get user's location
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        position => {
+          console.log(`Lat: ${position.coords.latitude} Lng:   ${position.coords.longitude}`);
+
+          // Set marker's position.
+          marker.setPosition({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          });
+
+          // Center map to user's position.
+          map.panTo({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          });
+        },
+        // err => alert(`Error (${err.code}): ${getPositionErrorMessage(err.code)}`)
+      );
+    } else {
+      marker.setPosition(uw)
+    }
+  }
+</script>
+
+
+</html>
